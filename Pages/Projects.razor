@@ -1,0 +1,50 @@
+﻿@page "/projects"
+@inherits ProjectsView
+
+@if (Projects == null) 
+{ 
+    <div class="text-warning">loading projects...</div>
+}
+else
+{
+<table class="table table-striped table-bordered">
+
+    <thead>
+        <tr>
+            <td>Title</td>
+            <td>Description</td>
+            <td>Days will require</td>
+            <td>Starting date</td>
+            <td>Options</td>
+        </tr>
+    </thead>
+
+    <tbody>
+    @foreach(var project in Projects)
+    {
+        <tr>
+            <td>@project.Title</td>
+            <td>@project.Description</td>
+            <td>@project.DaysToComplete</td>
+            <td>@project.StartingDate?.ToString("MM/d")</td>
+            <td>
+                <button class="btn btn-danger btn-sm" @onclick=@(async () => await DeleteAsync(project)) >Delete</button>
+            </td>
+        </tr>
+    }
+    </tbody>
+
+</table>
+}
+
+<EditForm Model=ProjectToAdd OnValidSubmit=AddAsync>
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <InputText @bind-Value="ProjectToAdd.Title" placeholder="Title" />
+    <InputText @bind-Value="ProjectToAdd.Description" placeholder="Description" />
+    <InputNumber @bind-Value="ProjectToAdd.DaysToComplete" placeholder="Days to take" />
+    <InputDate @bind-Value="ProjectToAdd.StartingDate" />
+
+    <button type="submit" class="btn btn-success">Add</button>
+</EditForm>
