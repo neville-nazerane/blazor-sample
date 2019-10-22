@@ -1,7 +1,12 @@
 
 
 trigger:
-- master
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - src
 
 pool:
   vmImage: 'ubuntu-18.04'
