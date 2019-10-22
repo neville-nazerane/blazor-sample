@@ -3,7 +3,7 @@ Description=Sample blazor app
 
 [Service]
 WorkingDirectory=/var/www/blazorSample
-ExecStart=/usr/bin/dotnet /var/www/blazorSample/pusher.dll --urls http://localhost:#{url_port}#
+ExecStart=/usr/bin/dotnet /var/www/blazorSample/pusher.dll --urls http://localhost:#{url.port}#
 Restart=always
 # Restart service after 10 seconds if the dotnet service crashes:
 RestartSec=10
@@ -11,7 +11,8 @@ KillSignal=SIGINT
 SyslogIdentifier=blazor-sample
 User=www-data
 Environment=ASPNETCORE_ENVIRONMENT=Production
-Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+Environment=signalr=#{config.signalr}#
+Environment=ConnectionStrings__db=#{config.dbConn}#
 
 [Install]
 WantedBy=multi-user.target
