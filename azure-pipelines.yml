@@ -4,7 +4,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu'
+  vmImage: 'ubuntu-18.04'
 
 variables:
   solution: 'pusher.sln'
